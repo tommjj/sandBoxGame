@@ -4,27 +4,26 @@ import java.awt.Graphics;
 import java.util.ArrayList;
 
 public class SandsManager {
-    private ArrayList<Sand> sands = new ArrayList<>();
 
-    public SandsManager() {
+    private ArrayList<Sand> sands = new ArrayList<>();
+    private PointManager pointManager;
+    
+    public SandsManager(PointManager pointManager) {
+        this.pointManager = pointManager;
     }
     
-    public boolean canMove(int x, int y) {
-        if(x < 1 || x > 799)
-            return false;
-        if(y < 1 || y > 499)
-            return false;
-        int n = sands.size();
-        for (int i = 0; i < n; i++) {
-            if(sands.get(i).getX() == x && sands.get(i).getY() == y) {
-                return false;
-            }
-        }
-        return true;
+    public ArrayList<Sand> getSands() {
+        return sands;
+    }
+    
+    public PointManager getPointManager() {
+        return pointManager;
     }
     
     public void createSand(int x, int y) {
-        sands.add(new Sand(x, y, this));
+        if (pointManager.canMove(x, y)) {
+            sands.add(new Sand(x, y, this));
+        }
     }
     
     public void update() {

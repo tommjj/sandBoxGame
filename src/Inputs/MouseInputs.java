@@ -15,17 +15,18 @@ public class MouseInputs implements MouseListener, MouseMotionListener {
 
     @Override
     public void mouseClicked(MouseEvent e) {
-        gamepanel.getGame().getSandsManager().createSand(e.getX(), e.getY());
+        //gamepanel.getGame().getSandsManager().createSand(e.getX(), e.getY());
     }
 
     @Override
     public void mousePressed(MouseEvent e) {
-        
+        gamepanel.getGame().setmXY(e.getX(), e.getY());
+        gamepanel.getGame().setMousePressedCheck(true);
     }
 
     @Override
     public void mouseReleased(MouseEvent me) {
-     
+        gamepanel.getGame().setMousePressedCheck(false);
     }
 
     @Override
@@ -40,7 +41,7 @@ public class MouseInputs implements MouseListener, MouseMotionListener {
 
     @Override
     public void mouseDragged(MouseEvent e) {
-        gamepanel.getGame().getSandsManager().createSand(e.getX(), e.getY());
+        gamepanel.getGame().setmXY(e.getX(), e.getY());
     }
 
     @Override

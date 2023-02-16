@@ -1,6 +1,6 @@
 package Main;
 
-import entities.SandsManager;
+import entities.PointManager;
 import java.awt.Graphics;
 
 public class Game implements Runnable {
@@ -12,8 +12,12 @@ public class Game implements Runnable {
 
     private boolean updateCheck = false;
 
-    private SandsManager sandsManager;
-
+    private PointManager pointManager;
+    
+    private boolean mousePressedCheck = false;
+    private int mX, mY;
+    
+    
     public Game() {
         initClasses();
         gamePanel = new GamePanel(this);
@@ -25,6 +29,10 @@ public class Game implements Runnable {
         startGameLoop();
     }
 
+    public PointManager getPointManager() {
+        return pointManager;
+    }
+
     public void setUpdateCheck(boolean updateCheck) {
         this.updateCheck = updateCheck;
     }
@@ -34,18 +42,16 @@ public class Game implements Runnable {
     }
 
     private void initClasses() {
-        sandsManager = new SandsManager();
+        pointManager = new PointManager();
     }
 
     public void update() {
+        if(mousePressedCheck) {
+            getPointManager().getSandsManager().createSand(mX, mY);
+        }
+        
         if (updateCheck) {
-            new Thread() {
-                @Override
-                public void run() {
-                    sandsManager.update();
-                }
-            }.start();
-
+            pointManager.update();
         }
     }
 
@@ -55,12 +61,10 @@ public class Game implements Runnable {
     }
 
     public void rander(Graphics g) {
-        sandsManager.draw(g);
+        pointManager.draw(g);
     }
-
-    public SandsManager getSandsManager() {
-        return sandsManager;
-    }
+    
+    
 
     @Override
     public void run() {
@@ -102,4 +106,15 @@ public class Game implements Runnable {
             }
         }
     }
+
+    public void setMousePressedCheck(boolean mousePressedCheck) {
+        this.mousePressedCheck = mousePressedCheck;
+    }
+
+    public void setmXY(int mX, int mY) {
+        this.mX = mX;
+        this.mY = mY;
+    }
+    
+    
 }

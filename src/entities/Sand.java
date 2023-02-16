@@ -23,12 +23,12 @@ public class Sand {
     }
 
     public void update() {
-        if (sandsManager.canMove(x, y + 1)) {
+        if (sandsManager.getPointManager().canMove(x, y + 1)) {
             y++;
-        } else if (sandsManager.canMove(x - 1, y + 1) && sandsManager.canMove(x - 1, y)) {
+        } else if (sandsManager.getPointManager().canMove(x - 1, y + 1) && sandsManager.getPointManager().canMove(x - 1, y)) {
             y++;
             x--;
-        } else if (sandsManager.canMove(x + 1, y + 1) && sandsManager.canMove(x + 1, y)) {
+        } else if (sandsManager.getPointManager().canMove(x + 1, y + 1) && sandsManager.getPointManager().canMove(x + 1, y)) {
             y++;
             x++;
         }
